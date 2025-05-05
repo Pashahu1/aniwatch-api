@@ -57,36 +57,4 @@ app.basePath(BASE_PATH).get("/anicrush", (c) =>
 app.notFound(notFoundHandler);
 app.onError(errorHandler);
 
-// NOTE: this env is "required" for vercel deployments
-if (!Boolean(process.env?.ANIWATCH_API_VERCEL_DEPLOYMENT)) {
-    serve({
-        port: PORT,
-        fetch: app.fetch,
-    }).addListener("listening", () =>
-        console.info(
-            "\x1b[1;36m" +
-                `aniwatch-api at http://localhost:${PORT}` +
-                "\x1b[0m"
-        )
-    );
-
-    // NOTE: remove the `if` block below for personal deployments
-    if (ISNT_PERSONAL_DEPLOYMENT) {
-        const interval = 9 * 60 * 1000; // 9mins
-
-        // don't sleep
-        setInterval(() => {
-            console.log(
-                "aniwatch-api HEALTH_CHECK at",
-                new Date().toISOString()
-            );
-            https
-                .get(`https://${ANIWATCH_API_HOSTNAME}/health`)
-                .on("error", (err) => {
-                    console.error(err.message);
-                });
-        }, interval);
-    }
-}
-
 export default app;
