@@ -1,4 +1,4 @@
-import https from "https";
+// import https from "https";
 import { config } from "dotenv";
 
 import corsConfig from "./config/cors.js";
@@ -12,7 +12,7 @@ import { hianimeRouter } from "./routes/hianime.js";
 
 import { Hono } from "hono";
 import { logger } from "hono/logger";
-import { serve } from "@hono/node-server";
+// import { serve } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";
 
 import pkgJson from "../package.json" with { type: "json" };
@@ -22,7 +22,7 @@ import type { AniwatchAPIVariables } from "./config/variables.js";
 config();
 
 const BASE_PATH = "/api/v2" as const;
-const PORT: number = Number(process.env.ANIWATCH_API_PORT) || 4000;
+// const PORT: number = Number(process.env.ANIWATCH_API_PORT) || 4000;
 const ANIWATCH_API_HOSTNAME = process.env?.ANIWATCH_API_HOSTNAME;
 
 const app = new Hono<{ Variables: AniwatchAPIVariables }>();
